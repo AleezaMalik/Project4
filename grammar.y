@@ -138,10 +138,10 @@ construct_while :
       // Third semantic action
       // TODO: generate an unconditional jump to the first instruction of l_expr
       int jump_dst = @2.begin.line;
-      itab_instruction_add (itab, OP_JMP, NOARG, NOARG, @2.begin.line);
+      itab_instruction_add (itab, OP_JMP, NOARG, NOARG, jump_dst);
       // TODO: set the destination jump that terminates the loop
       int jmp_entry = @6.begin.line;
-      itab->tab[@6.begin.line]->addr3 = INSTRUCTION_NEXT;
+      itab->tab[jump_entry]->addr3 = INSTRUCTION_NEXT;
     }
     ;
 
