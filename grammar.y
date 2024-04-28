@@ -164,7 +164,7 @@ construct_repeat:
       int jump_dst = @1.begin.line;
       // TODO: Generate a jump-if-zero (OP_JZ) to the address stored in the first semantic
       // action of this rule
-      itab_instruction_add (itab, OP_JZ, $5->addr, UNUSED_ARG, jump_dst);
+      itab_instruction_add (itab, OP_JZ, $5->addr, NOARG, jump_dst);
     }
     ;
 
@@ -314,7 +314,7 @@ a_expr : a_expr T_ADD a_term
           res = make_temp (symtab, $1->datatype);
           itab_instruction_add (itab, OP_ADD, res->addr, $1->addr, $3->addr);
         }
-        if ($1->datatype == DTYPE_FLOAT)
+        else if ($1->datatype == DTYPE_FLOAT)
         {
           // TASK: Modify this semantic action to support both DTYPE_INT and DTYPE_FLOAT.
           // For DTYPE_FLOAT you should generate an OP_FADD instruction.
@@ -367,7 +367,7 @@ a_term : a_term T_MUL a_fact
           res = make_temp (symtab, $1->datatype);
           itab_instruction_add (itab, OP_MUL, res->addr, $1->addr, $3->addr);
         }
-        if ($1->datatype == DTYPE_FLOAT)
+        else if ($1->datatype == DTYPE_FLOAT)
         {
           // TASK: Modify this semantic action to support both DTYPE_INT and DTYPE_FLOAT.
           // For DTYPE_FLOAT you should generate an OP_FMUL instruction.
