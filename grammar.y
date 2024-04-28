@@ -239,9 +239,9 @@ assignment : T_ID arr_index T_ASSIGN a_expr
         temp = make_temp (symtab, sym->datatype);
         // TASK: Complete the four TBD_ARG in both calls to itab_instruction_add.
         if (sym->datatype == DTYPE_INT)
-          itab_instruction_add (itab, OP_CAST_FLOAT2INT, temp->addr, src_temp->addr, TBD_ARG);
+          itab_instruction_add (itab, OP_CAST_FLOAT2INT, temp->addr, src_temp->addr, UNUSED_ARG);
         else
-          itab_instruction_add (itab, OP_CAST_INT2FLOAT, temp->addr, src_temp->addr, TBD_ARG);
+          itab_instruction_add (itab, OP_CAST_INT2FLOAT, temp->addr, src_temp->addr, UNUSED_ARG);
 
         // Final store to the array will use the intermediate variable resulting from the cast.
         src_temp = temp;
@@ -264,7 +264,7 @@ assignment : T_ID arr_index T_ASSIGN a_expr
 
         // TASK: Complete the two TBD_ARG in the following call to itab_instruction_add.
         // HINT: See the code corresponding to OP_LOAD_ARRAY_VAL_*
-        itab_instruction_add (itab, opcode, sym->addr, src_temp->addr, TBD_ARG);
+        itab_instruction_add (itab, opcode, sym->addr, src_temp->addr, $2->addr);
       }
       else
       {
