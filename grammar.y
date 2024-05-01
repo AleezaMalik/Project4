@@ -141,7 +141,7 @@ construct_while :
       itab_instruction_add (itab, OP_JMP, NOARG, NOARG, jump_dst);
       // TODO: set the destination jump that terminates the loop
       int jmp_entry = @6.begin.line;
-      itab->tab[jump_entry]->addr3 = INSTRUCTION_NEXT;
+      itab->tab[jmp_entry]->addr3 = INSTRUCTION_NEXT;
     }
     ;
 
@@ -164,7 +164,7 @@ construct_repeat:
       int jump_dst = @1.begin.line;
       // TODO: Generate a jump-if-zero (OP_JZ) to the address stored in the first semantic
       // action of this rule
-      itab_instruction_add (itab, OP_JZ, $5->addr, NOARG, jump_dst);
+      itab_instruction_add (itab, OP_JZ, $6->addr, NOARG, jump_dst);
     }
     ;
 
@@ -535,4 +535,5 @@ expr_list : expr_list  T_COMMA a_expr
 void yy::simple_parser::error (const yy::location & l, const std::string & s) {
 	std::cerr << "Simple Parser error at " << l << " : " << s << std::endl;
 }
+
 
